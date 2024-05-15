@@ -12,21 +12,21 @@ class BreadthFirst():
         self.route = None
         self.route_found = False
 
-    def draw_all_paths(self, i, j):
-        ##### Draw each node the computer is visiting as it is searching SIMULTNEOUSLY
-        pygame.draw.rect(self.app.screen, TAN, (i * 12 + 240, j * 12, 12, 12), 0)
+    # def draw_all_paths(self, i, j):
+    #     ##### Draw each node the computer is visiting as it is searching SIMULTNEOUSLY
+    #     pygame.draw.rect(self.app.screen, TAN, (i * 12 + 240, j * 12, 12, 12), 0)
 
-        ##### Redraw start/end nodes on top of all routes
-        pygame.draw.rect(self.app.screen, TOMATO, (240 + self.start_node_x * 12, self.start_node_y * 12, 12, 12), 0)
-        pygame.draw.rect(self.app.screen, ROYALBLUE, (240 + self.end_node_x * 12, self.end_node_y * 12, 12, 12), 0)
+    #     ##### Redraw start/end nodes on top of all routes
+    #     pygame.draw.rect(self.app.screen, TOMATO, (240 + self.start_node_x * 12, self.start_node_y * 12, 12, 12), 0)
+    #     pygame.draw.rect(self.app.screen, ROYALBLUE, (240 + self.end_node_x * 12, self.end_node_y * 12, 12, 12), 0)
 
-        # Redraw grid (for aesthetic purposes lol)
-        for x in range(104):
-            pygame.draw.line(self.app.screen, ALICE, (GS_X + x * 12, GS_Y), (GS_X + x * 12, GE_Y))
-        for y in range(60):
-            pygame.draw.line(self.app.screen, ALICE, (GS_X, GS_Y + y * 12), (GE_X, GS_Y + y * 12))
+    #     # Redraw grid (for aesthetic purposes lol)
+    #     for x in range(104):
+    #         pygame.draw.line(self.app.screen, ALICE, (GS_X + x * 12, GS_Y), (GS_X + x * 12, GE_Y))
+    #     for y in range(60):
+    #         pygame.draw.line(self.app.screen, ALICE, (GS_X, GS_Y + y * 12), (GE_X, GS_Y + y * 12))
 
-        pygame.display.update()
+    #     pygame.display.update()
 
     def checkValid(self, move):
         if move not in self.wall_pos and move not in self.visited:
@@ -64,7 +64,7 @@ class BreadthFirst():
                 # Make new variable "latest_moves" for adding onto the queue again, because you don't want the 'parent' variable to change
                 latest_moves = first_moves + m
                 if self.checkValid((i, j)):
-                    self.draw_all_paths(i, j)
+                    #self.draw_all_paths(i, j)
                     queue.append((i, j))
                     moves_queue.append(latest_moves)
 
@@ -72,7 +72,9 @@ class BreadthFirst():
                     self.route = latest_moves
                     self.route_found = True
                     break
-
+            
             if self.route_found:
                 break
+
+    
 
