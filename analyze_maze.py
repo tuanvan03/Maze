@@ -1,18 +1,21 @@
+import os
+import cv2
+import time
+import psutil
+import pandas as pd
+from PIL import Image
+import numpy as np
+from bfs_class import BreadthFirst
+from settings import wall_nodes_coords_list
+
 from bfs_class import *
 from dfs_class import *
 from astar_class import *
 from dijkstra_class import *
 from bidirectional_class import *
-import cv2
-import time
-from insert_maze import *
-import os
-import psutil
-import pandas as pd
-from settings import *
-
-
-# Doc anh
+# from insert_maze import *
+# from settings import *
+# Đọc ảnh
 def read_image(image_path):
     file_list = os.listdir(image_path)
 
@@ -23,6 +26,7 @@ def read_image(image_path):
         if file.lower().endswith((".jpg", ".jpeg", ".png", ".gif", ".bmp"))
     ]
     result = []
+    image_names = []  # Tạo một list để lưu tên của các ảnh
     for file_path in image_files:
         img = Image.open(file_path)
         target_size = (104, 60)
@@ -35,16 +39,18 @@ def read_image(image_path):
         binary_matrix = (matrix[:, :, 0] > 128).astype(int)
         print(len(binary_matrix), len(binary_matrix[0]))
         result.append(binary_matrix)
+        
+        # Lưu tên của ảnh vào list
+        image_names.append(os.path.splitext(os.path.basename(file_path))[0])  # Lấy tên của ảnh mà không có phần mở rộng
 
-    return result
+    return result, image_names  # Trả về kết quả và tên của các ảnh
 
 
 def main():
-    image_path = "D:\\SV\\HK6\\Algorithms and Analysis\\Maze\\SourceImg\\Maze\\New"
-    binary_img = read_image(image_path)
+    image_path = "C:\\Daihoc\\Ky2nam3\\TK_DGTT\\Baitaplon\\Maze\\SourceImg\\Maze\\New\\Small_Maze"
+    binary_img, image_names = read_image(image_path)  # Lấy binary_img và image_names từ hàm read_image
     count = 0
-    for matrix in binary_img:
-        # print(len(matrix))
+    for matrix, image_name in zip(binary_img, image_names):  # Sử dụng hàm zip để lặp qua binary_img và image_names cùng một lúc
         count += 1
         data = []
         print(matrix)
@@ -83,7 +89,7 @@ def main():
                 "Runtime (s)": execution_time,
                 "Memory Usage (MB)": memory_usage,
                 "Movement": len(bfs.route),
-                "Maze": "maze" + str(count),
+                "Maze": image_name,  # Lưu tên của ảnh vào cột "Maze"
             }
         )
         try:
@@ -99,7 +105,7 @@ def main():
         print("Route_found : ", bfs.route_found)
         print("Thời gian thực thi:", execution_time)
         print("Bộ nhớ cần dùng:", memory_usage)
-        print("Bộ nhớ cần dùng:", len(bfs.route))
+        print("Các bước di chuyển : ", len(bfs.route))
 
 
 if __name__ == "__main__":
