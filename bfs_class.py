@@ -33,17 +33,17 @@ class BreadthFirst:
     #         0,
     #     )
 
-        # Redraw grid (for aesthetic purposes lol)
-        for x in range(104):
-            pygame.draw.line(
-                self.app.screen, ALICE, (GS_X + x * 12, GS_Y), (GS_X + x * 12, GE_Y)
-            )
-        for y in range(60):
-            pygame.draw.line(
-                self.app.screen, ALICE, (GS_X, GS_Y + y * 12), (GE_X, GS_Y + y * 12)
-            )
+    #     # Redraw grid (for aesthetic purposes lol)
+    #     for x in range(104):
+    #         pygame.draw.line(
+    #             self.app.screen, ALICE, (GS_X + x * 12, GS_Y), (GS_X + x * 12, GE_Y)
+    #         )
+    #     for y in range(60):
+    #         pygame.draw.line(
+    #             self.app.screen, ALICE, (GS_X, GS_Y + y * 12), (GE_X, GS_Y + y * 12)
+    #         )
 
-        pygame.display.update()
+    #     pygame.display.update()
 
     def checkValid(self, move):
         if move not in self.wall_pos and move not in self.visited:
