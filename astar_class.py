@@ -40,7 +40,7 @@ class AStar():
         pygame.display.update()
 
     def generate_children(self, parent, end_node):
-        print('generating children')
+        #print('generating children')
         parent_pos = parent.position
         for m in [(-1, 0), (1, 0), (0, 1), (0, -1), (-1, 1), (1, 1), (1, -1), (-1, -1)]:
             child_pos = (parent_pos[0] + m[0], parent_pos[1] + m[1])
@@ -125,8 +125,8 @@ class AStar():
 
         self.open_list.append(start_node)
 
-        print(start_node.position)
-        print(end_node.position)
+        #print(start_node.position)
+        #print(end_node.position)
 
         while len(self.open_list) > 0:
             current_node = self.open_list[0]
@@ -150,7 +150,7 @@ class AStar():
                 break
 
             self.generate_children(current_node, end_node)
-            self.draw_all_paths(current_node.position)
+            #self.draw_all_paths(current_node.position)
 
             self.open_list.pop(current_index)
             self.closed_list.append(current_node.position)

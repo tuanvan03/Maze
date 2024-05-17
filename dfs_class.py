@@ -77,7 +77,7 @@ class DepthFirst():
                 if self.checkValid((i, j)):
                     stack.append((i, j))
                     moves_stack.append(move_update)
-                    self.draw_all_paths(i, j)
+                    #self.draw_all_paths(i, j)
 
             if self.route_found:
                 break

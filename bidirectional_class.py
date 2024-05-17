@@ -100,11 +100,11 @@ class Bidirectional():
 
                 if self.checkValid(new_node_f, self.visited_node_f, self.visited_pos_f):
                     #print(new_node_f.position)
-                    self.draw_all_paths(new_node_f.position, VIOLETRED)
+                    #self.draw_all_paths(new_node_f.position, VIOLETRED)
                     fwd_queue.append(new_node_f)
 
                 if self.checkValid(new_node_r, self.visited_node_r, self.visited_pos_r):
-                    self.draw_all_paths(new_node_r.position, TURQUOISE)
+                    #self.draw_all_paths(new_node_r.position, TURQUOISE)
                     rev_queue.append(new_node_r)
 
                 # Check if some route has been found from either ends
@@ -123,6 +123,6 @@ class Bidirectional():
                     break
 
             if self.route_found:
-                print(self.route_f)
+                #print(self.route_f)
                 # print(self.route_r)
                 break

@@ -118,7 +118,7 @@ class Dijkstra:
                 self.route_found = True
                 break
 
-            self.draw_all_paths(current_node.position)
+            #self.draw_all_paths(current_node.position)
             self.generate_children(current_node)
 
             self.open_list.pop(current_index)
