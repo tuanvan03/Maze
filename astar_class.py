@@ -1,15 +1,19 @@
 from settings import *
 
+
 class Node:
-    def __init__(self, position = None, parent = None):
+    def __init__(self, position=None, parent=None):
         self.position = position
         self.parent = parent
         self.G = 0
         self.H = 0
         self.F = 0
 
-class AStar():
-    def __init__(self, app, start_node_x, start_node_y, end_node_x, end_node_y, wall_pos):
+
+class AStar:
+    def __init__(
+        self, app, start_node_x, start_node_y, end_node_x, end_node_y, wall_pos
+    ):
         self.app = app
         self.start_node_x = start_node_x
         self.start_node_y = start_node_y
@@ -28,19 +32,33 @@ class AStar():
         pygame.draw.rect(self.app.screen, TAN, (i * 12 + 240, j * 12, 12, 12), 0)
 
         ##### Redraw start/end nodes on top of all routes
-        pygame.draw.rect(self.app.screen, TOMATO, (240 + self.start_node_x * 12, self.start_node_y * 12, 12, 12), 0)
-        pygame.draw.rect(self.app.screen, ROYALBLUE, (240 + self.end_node_x * 12, self.end_node_y * 12, 12, 12), 0)
+        pygame.draw.rect(
+            self.app.screen,
+            TOMATO,
+            (240 + self.start_node_x * 12, self.start_node_y * 12, 12, 12),
+            0,
+        )
+        pygame.draw.rect(
+            self.app.screen,
+            ROYALBLUE,
+            (240 + self.end_node_x * 12, self.end_node_y * 12, 12, 12),
+            0,
+        )
 
         # Redraw grid (for aesthetic purposes lol)
         for x in range(104):
-            pygame.draw.line(self.app.screen, ALICE, (GS_X + x * 12, GS_Y), (GS_X + x * 12, GE_Y))
+            pygame.draw.line(
+                self.app.screen, ALICE, (GS_X + x * 12, GS_Y), (GS_X + x * 12, GE_Y)
+            )
         for y in range(60):
-            pygame.draw.line(self.app.screen, ALICE, (GS_X, GS_Y + y * 12), (GE_X, GS_Y + y * 12))
+            pygame.draw.line(
+                self.app.screen, ALICE, (GS_X, GS_Y + y * 12), (GE_X, GS_Y + y * 12)
+            )
 
         pygame.display.update()
 
     def generate_children(self, parent, end_node):
-        print('generating children')
+        # print("generating children")
         parent_pos = parent.position
         for m in [(-1, 0), (1, 0), (0, 1), (0, -1), (-1, 1), (1, 1), (1, -1), (-1, -1)]:
             child_pos = (parent_pos[0] + m[0], parent_pos[1] + m[1])
@@ -101,7 +119,9 @@ class AStar():
             child.G = parent.G + 14
 
     def H_calc(self, child, end_node):
-        child.H = ((child.position[0] - end_node.position[0]) ** 2) + ((child.position[1] - end_node.position[1]) ** 2)
+        child.H = ((child.position[0] - end_node.position[0]) ** 2) + (
+            (child.position[1] - end_node.position[1]) ** 2
+        )
 
     def F_calc(self, child):
         child.F = child.G + child.H
@@ -125,8 +145,8 @@ class AStar():
 
         self.open_list.append(start_node)
 
-        print(start_node.position)
-        print(end_node.position)
+        # print(start_node.position)
+        # print(end_node.position)
 
         while len(self.open_list) > 0:
             current_node = self.open_list[0]
@@ -154,19 +174,3 @@ class AStar():
 
             self.open_list.pop(current_index)
             self.closed_list.append(current_node.position)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
