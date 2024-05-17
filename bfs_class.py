@@ -81,7 +81,7 @@ class BreadthFirst:
                 # Make new variable "latest_moves" for adding onto the queue again, because you don't want the 'parent' variable to change
                 latest_moves = first_moves + m
                 if self.checkValid((i, j)):
-                    self.draw_all_paths(i, j)
+                    # self.draw_all_paths(i, j)
                     queue.append((i, j))
                     moves_queue.append(latest_moves)
 
