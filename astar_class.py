@@ -170,7 +170,7 @@ class AStar:
                 break
 
             self.generate_children(current_node, end_node)
-            self.draw_all_paths(current_node.position)
+            # self.draw_all_paths(current_node.position)
 
             self.open_list.pop(current_index)
             self.closed_list.append(current_node.position)

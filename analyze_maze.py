@@ -10,6 +10,7 @@ from dfs_class import DepthFirst
 from astar_class import AStar
 from dijkstra_class import Dijkstra
 from bidirectional_class import Bidirectional
+import gc
 
 
 # Đọc ảnh
@@ -49,6 +50,8 @@ def measure_memory_and_time(execute_func):
     end_time = time.time()
     current, peak = tracemalloc.get_traced_memory()
     tracemalloc.stop()
+    gc.collect()
+
     execution_time = end_time - start_time
     memory_usage = peak / (1024**2)
     return execution_time, memory_usage
@@ -124,12 +127,15 @@ def process_images_in_folder(image_path, output_excel):
 
 
 def main():
-    parent_folder = "D:\\SV\\HK6\\Algorithms and Analysis\\Maze\\SourceImg\\Maze\\Type"
+    parent_folder = (
+        "D:\\SV\\HK6\\Algorithms and Analysis\\Maze\\SourceImg\\Maze\\Type\Test\\test1"
+    )
 
     for subdir in next(os.walk(parent_folder))[1]:
         subfolder_path = os.path.join(parent_folder, subdir)
         output_excel = os.path.join(parent_folder, f"{subdir}.xlsx")
         process_images_in_folder(subfolder_path, output_excel)
+        gc.collect()
 
 
 if __name__ == "__main__":
