@@ -7,12 +7,12 @@ def rename_images_in_subfolders(parent_folder):
         
         for i, file in enumerate(image_files):
             old_file_path = os.path.join(subdir, file)
-            new_file_name = f"maze_{folder_name}_{i + 1:02d}{os.path.splitext(file)[1]}"
+            new_file_name = f"Mz_{folder_name}_{i + 1:02d}{os.path.splitext(file)[1]}"
             new_file_path = os.path.join(subdir, new_file_name)
             
             os.rename(old_file_path, new_file_path)
             print(f"Renamed: {old_file_path} to {new_file_path}")
 
 if __name__ == "__main__":
-    parent_folder = "C:\\Daihoc\\Ky2nam3\\TK_DGTT\\Baitaplon\\Maze\\SourceImg\\Maze\\Type"
+    parent_folder = "C:\\Daihoc\\Ky2nam3\\TK_DGTT\\Baitaplon\\Maze\\SourceImg\\Maze\\Type (1)"
     rename_images_in_subfolders(parent_folder)
