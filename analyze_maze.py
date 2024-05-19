@@ -124,7 +124,7 @@ def process_images_in_folder(image_path, output_excel):
 
 
 def main():
-    parent_folder = "D:\\SV\\HK6\\Algorithms and Analysis\\Maze\\SourceImg\\Maze\\Type"
+    parent_folder = "C:\\Daihoc\\Ky2nam3\\TK_DGTT\\Baitaplon\\Maze\\SourceImg\\Maze\\Type (1)"
 
     for subdir in next(os.walk(parent_folder))[1]:
         subfolder_path = os.path.join(parent_folder, subdir)
