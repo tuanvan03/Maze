@@ -27,7 +27,8 @@ def read_image(image_path):
     image_names = []  # Tạo một list để lưu tên của các ảnh
     for file_path in image_files:
         img = Image.open(file_path)
-        target_size = (104, 60)
+        w, h = img.size
+        target_size = (w // 10, h // 10)
         img_resized = img.resize(target_size, resample=Image.BILINEAR)
 
         # Convert the resized image to a NumPy array

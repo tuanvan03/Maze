@@ -1,4 +1,5 @@
 from settings import *
+import heapq
 
 
 class Node:
@@ -8,6 +9,9 @@ class Node:
         self.G = 0
         self.H = 0
         self.F = 0
+
+    def __lt__(self, other):
+        return self.F < other.F
 
 
 class AStar:
@@ -20,7 +24,8 @@ class AStar:
         self.end_node_x = end_node_x
         self.end_node_y = end_node_y
         self.open_list = []
-        self.closed_list = []
+        # self.closed_list = []
+        self.closed_list = set()
         self.wall_pos = wall_pos
         self.route = []
         self.route_found = False
@@ -70,7 +75,8 @@ class AStar:
 
                 # If node not already added to the open list AND node isn't cutting corners around wall, then append
                 if self.append_to_open(child):
-                    self.open_list.append(child)
+                    # self.open_list.append(child)
+                    heapq.heappush(self.open_list, child)
 
     def append_to_open(self, child):
         for open_node in self.open_list:
@@ -143,20 +149,21 @@ class AStar:
         end_node = Node((self.end_node_x, self.end_node_y), None)
         end_node.G = end_node.H = end_node.F = 0
 
-        self.open_list.append(start_node)
-
+        # self.open_list.append(start_node)
+        heapq.heappush(self.open_list, start_node)
         # print(start_node.position)
         # print(end_node.position)
 
         while len(self.open_list) > 0:
-            current_node = self.open_list[0]
+            # current_node = self.open_list[0]
+            current_node = heapq.heappop(self.open_list)
             current_index = 0
 
             # Get the node with lowest F-Cost
-            for index, node in enumerate(self.open_list):
-                if node.F < current_node.F:
-                    current_node = node
-                    current_index = index
+            # for index, node in enumerate(self.open_list):
+            #     if node.F < current_node.F:
+            #         current_node = node
+            #         current_index = index
 
             # Check if route has been found
             if self.findEnd(current_node.position):
@@ -170,7 +177,8 @@ class AStar:
                 break
 
             self.generate_children(current_node, end_node)
-            # self.draw_all_paths(current_node.position)
+            self.draw_all_paths(current_node.position)
 
-            self.open_list.pop(current_index)
-            self.closed_list.append(current_node.position)
+            # self.open_list.pop(current_index)
+            # self.closed_list.append(current_node.position)
+            self.closed_list.add(current_node.position)
